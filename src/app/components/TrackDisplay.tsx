@@ -14,7 +14,6 @@ import Typography from "@mui/material/Typography";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { BarChart } from "@mui/x-charts/BarChart";
 
-
 // Fonts
 const montitle = Montserrat({
   subsets: ["latin"],
@@ -32,28 +31,22 @@ const roboSub = Roboto({
   style: "normal",
 });
 
-
-
 interface Props {
   duration: number[];
 }
-
-
 
 const TrackDisplay: React.FC<Props> = ({ duration }) => {
   const [comments, setComments] = useState<string[]>(
     Array(duration.length).fill("")
   );
 
-    
-    // different states 
+  // different states
   const [openModal, setOpenModal] = useState(false);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const [rates, setRates] = useState<number[]>([]);
-    const length = duration.length;
+  const length = duration.length;
 
-
-  // handlers 
+  // handlers
   const handleCommentChange = (index: number, comment: string) => {
     const newComments = [...comments];
     newComments[index] = comment;
@@ -66,15 +59,10 @@ const TrackDisplay: React.FC<Props> = ({ duration }) => {
     setRates(newRates);
   };
 
-    
-    
   function getHoursAndMinutes(decimalHours: number) {
     const hours = Math.floor(decimalHours);
     const decimalMinutes = (decimalHours - hours) * 60;
-      const minutes = Math.round(decimalMinutes);
-      
-
-      
+    const minutes = Math.round(decimalMinutes);
 
     return (
       <p
@@ -199,16 +187,19 @@ const TrackDisplay: React.FC<Props> = ({ duration }) => {
           );
         })}
       </div>
-      <h1
-        className={`text-black mt-6 dark:text-slate-100 md:text-2xl text-2xl sm:text-xl ${montitle.className}`}
-      >
-        {" "}
-        Your Progress
-      </h1>
+      {rates.length != 0 && (
+        <h1
+          className={`text-black mt-6 dark:text-slate-100 md:text-2xl text-2xl sm:text-xl ${montitle.className}`}
+        >
+          {" "}
+          Your Progress
+        </h1>
+      )}
       {duration.length !== 0 &&
         rates.length !== 0 &&
         duration.length === rates.length && (
           <BarChart
+            className="lg:w-1/2 max-w-full mx-auto"
             xAxis={[
               {
                 scaleType: "band",
@@ -216,7 +207,7 @@ const TrackDisplay: React.FC<Props> = ({ duration }) => {
               },
             ]}
             series={[{ data: duration }, { data: rates }]}
-            width={500}
+            width={400}
             height={300}
           />
         )}

@@ -5,7 +5,6 @@ import { useState } from "react";
 import TimeInput from "./TimeInput";
 import dayjs, { Dayjs } from "dayjs";
 
-
 interface Props {
   handleNewTrack: (bedTime: Dayjs | null, awakeTime: Dayjs | null) => void;
 }
@@ -20,9 +19,9 @@ const InputModal = ({ handleNewTrack }: Props) => {
     dayjs().hour(6).minute(0)
   );
 
-  const  onCloseModal=()=> {
+  const onCloseModal = () => {
     setOpenModal(false);
-  }
+  };
 
   const handleTrack = () => {
     handleNewTrack(bedTime, awakeTime);
@@ -33,7 +32,7 @@ const InputModal = ({ handleNewTrack }: Props) => {
     <>
       <Button
         onClick={() => setOpenModal(true)}
-        className="mt-8 bg-[#DAA520] hover:bg-[#f4c856ee] "
+        className="mt-8 bg-[#DAA520] hover:bg-[#f4c856ee]  w-32"
       >
         Add New
       </Button>
